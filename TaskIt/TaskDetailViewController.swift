@@ -12,8 +12,6 @@ class TaskDetailViewController: UIViewController {
     
     var detailTaskModel:TaskModel! // ! means pass the actual value, not an optional
     
-    var mainVC:ViewController!
-    
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var subtaskTextField: UITextField!
     @IBOutlet weak var dueDatePicker: UIDatePicker!
@@ -46,11 +44,15 @@ class TaskDetailViewController: UIViewController {
     
     @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
         
-        //self.mainVC.taskArray
+        let appDelegate = (UIApplication.sharedApplication().delegate) as AppDelegate
         
-        var task = TaskModel(task: self.taskTextField.text, subtask: self.subtaskTextField.text, date: self.dueDatePicker.date, isCompleted: false)
+        detailTaskModel.task = self.taskTextField.text
+        detailTaskModel.subtask = self.subtaskTextField.text
+        detailTaskModel.date = self.dueDatePicker.date
+        detailTaskModel.completed = self.detailTaskModel.completed
         
-        self.mainVC.baseArray[0][mainVC.tableView.indexPathForSelectedRow()!.row] = task
+        appDelegate.saveContext()
+        
         
         self.navigationController?.popViewControllerAnimated(true)
         
