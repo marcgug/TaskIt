@@ -111,7 +111,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if section == 0 {
             return "To do"
         } else {
-            return "Completed"
+            return "Done"
         }
     }
     
